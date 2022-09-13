@@ -1,0 +1,6 @@
+.stock-chart-view-wrapper{
+    min-height: 50vh;
+    max-height: 50vh;
+    min-width: 100%;
+    max-width: 100%;
+}

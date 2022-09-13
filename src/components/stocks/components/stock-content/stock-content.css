@@ -1,0 +1,24 @@
+.bp4-menu-item{
+    flex-direction: row-reverse;
+}
+
+.bp4-icon-caret-right{
+    transform: rotate(180deg); 
+    transform-origin: center;
+}
+
+.stock-content-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem 0;
+}
+
+.stock-content-body{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}

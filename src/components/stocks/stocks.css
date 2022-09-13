@@ -1,0 +1,16 @@
+.stock-page-wrapper{
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px); 
+}
+
+.stock-content-wrapper{
+    align-items: flex-start;
+    background-color: #f6f7f9;
+    outline: none;
+    flex-shrink: 1;
+    flex: 1;
+    height: 100%;
+    box-sizing: inherit;
+    overflow-y: scroll;
+}

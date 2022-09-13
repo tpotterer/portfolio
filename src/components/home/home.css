@@ -1,0 +1,15 @@
+.card{
+    padding: 50px;
+    max-width: 72rem;
+    margin: auto;
+}
+
+.card-main{
+    flex-direction: row;
+    display:flex
+}
+
+img {
+    width : 24rem;
+    height: auto; /*to preserve the aspect ratio of the image*/
+}

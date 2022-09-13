@@ -1,0 +1,34 @@
+.stock-card{
+    min-width: 15vw;
+    max-width: 15vw;
+    max-height: 12.5vh;
+    min-height: 12.5vh;
+    padding: 0;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.stock-card-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 1rem;
+    padding: 5px;
+}
+
+.stock-card-header{
+    overflow: hidden;
+    display: block;
+    font-size: .83em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.stock-card-wrapper{
+    min-width: 15vw;
+    max-width: 15vw;
+}
