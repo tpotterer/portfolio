@@ -6,9 +6,10 @@ import * as wc from "which-country";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Alert, Button } from "@blueprintjs/core";
+import { Alert, Button, Spinner } from "@blueprintjs/core";
 
 import mapboxgl from "mapbox-gl";
+// nothing to hide here so we can just keep the token in the code
 const API_KEY = `pk.eyJ1IjoidG9tb3R0ZXIiLCJhIjoiY2oza2Vka2gwMDAycDJ3cXBpZGtwdTkwYSJ9.AD__smT64vjUdsp0suXBNg`;
 mapboxgl.accessToken = API_KEY;
 
@@ -18,10 +19,11 @@ import { codeToTicker, mapSymbols } from "./map-symbols";
 import { dateConfigs } from "../stock-content/stock-content";
 
 import { formatRFC3339 } from "date-fns";
+import React from "react";
 
 const StockMap = () => {
   const mapContainer = useRef(null);
-  const map = useRef(null);
+  const map = useRef<mapboxgl.Map | null>(null);
   const [lng] = useState(9);
   const [lat] = useState(46.5);
   const [zoom] = useState(4);
@@ -36,6 +38,8 @@ const StockMap = () => {
 
   const [alertOpen, setAlertOpen] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   const [ticker, setTicker] = useState(null);
 
   const navigate = useNavigate();
@@ -47,7 +51,7 @@ const StockMap = () => {
   useEffect(() => {
     if (data) {
       setFormattedData(
-        Object.entries(data).reduce((prev, [ticker, curr]) => {
+        Object.entries(data).reduce((prev: any, [ticker, curr]: any) => {
           curr = curr.sort((a, b) => (a.t > b.t ? 1 : -1));
           const first = curr[0];
           const last = curr[curr.length - 1];
@@ -61,8 +65,8 @@ const StockMap = () => {
                 ((first.c - last.c) * 100) / first.c
               ).toFixed(2),
             },
-          ];
-        }, [])
+          ] as any;
+        }, []) as any
       );
     }
   }, [data]);
@@ -79,7 +83,7 @@ const StockMap = () => {
   }, [timeFrame]);
 
   useEffect(() => {
-    if (map.current || !formattedData || !formattedData.length) return; // initialize map only once
+    if (map.current || !formattedData || !(formattedData as any).length) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v8",
@@ -92,9 +96,10 @@ const StockMap = () => {
     map.current.on("click", "countries", (e) => {
       const ticker = codeToTicker.get(wc([e.lngLat.lng, e.lngLat.lat]));
       if (!ticker) return;
-      setTicker(ticker);
+      setTicker(ticker as any);
       setAlertOpen(true);
     });
+    setLoading(false);
 
     map.current.on("load", () => {
       map.current.setFog({
@@ -127,7 +132,7 @@ const StockMap = () => {
             ["get", "iso_3166_1_alpha_3"],
             [
               "literal",
-              formattedData.map((elem) => mapSymbols.get(elem.ticker)),
+              (formattedData as any).map((elem) => mapSymbols.get(elem.ticker)),
             ],
           ],
         ],
@@ -139,7 +144,7 @@ const StockMap = () => {
               ["get", "iso_3166_1_alpha_3"],
               [
                 "literal",
-                formattedData
+                (formattedData as any)
                   .filter((elem) => elem.direction === "up")
                   .map((elem) => mapSymbols.get(elem.ticker)),
               ],
@@ -168,12 +173,14 @@ const StockMap = () => {
         canEscapeKeyCancel={true}
         onClose={() => setAlertOpen(false)}
       >
-        <h2>{mapSymbols.get(ticker)}</h2>
+        <h2>{mapSymbols.get(ticker as any)}</h2>
         <h4>{ticker}</h4>
         <p>
           {(() => {
-            if (!formattedData || !formattedData.length) return null;
-            const elem = formattedData.find((elem) => elem.ticker === ticker);
+            if (!formattedData || !(formattedData as any).length) return null;
+            const elem = (formattedData as any).find(
+              (elem) => elem.ticker === ticker
+            );
             if (!elem) return;
             return `${elem.direction === "up" ? "Up" : "Down"} ${
               elem.percentageChange
@@ -185,6 +192,13 @@ const StockMap = () => {
         </Button>
       </Alert>
       <div className="map-container">
+        {loading ? (
+          <div className="spinner">
+            <Spinner />
+          </div>
+        ) : (
+          ""
+        )}
         <div ref={mapContainer} className="map-container" />
       </div>
     </>

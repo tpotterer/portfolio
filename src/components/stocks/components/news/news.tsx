@@ -6,6 +6,7 @@ import { Classes } from "@blueprintjs/core";
 import { useNavigate } from "react-router-dom";
 
 import * as sentiment from "sentiment";
+import React from "react";
 
 const News = ({ symbols }) => {
   const [stocks] = useState(symbols);
@@ -17,6 +18,7 @@ const News = ({ symbols }) => {
   const [news, setNews] = useState([
     {
       headline: "dummy",
+      summary: "",
       id: "",
       author: "",
       url: "",
@@ -36,7 +38,7 @@ const News = ({ symbols }) => {
     )
       .then((res) => res.json())
       .then((res) => setNews(res.news))
-      .then(setNewsLoading(false));
+      .then(setNewsLoading(false) as any);
   }, [stocks]);
 
   return (
@@ -44,7 +46,7 @@ const News = ({ symbols }) => {
       <h2>News</h2>
       {news.map((article) => {
         const sentimentResult = sentimentAnalyser.analyze(
-          article.headline
+          article.summary || article.headline
         ).comparative;
         const loading = article.headline === "dummy";
         return (

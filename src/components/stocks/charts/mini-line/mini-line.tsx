@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import PropTypes from "prop-types";
+import React from "react";
 
 const MiniLineChart = ({ data, parentId }) => {
   const svgRef = useRef(null);
 
   // TODO: Resizing
-  let parentDiv = document.getElementById(parentId);
+  let parentDiv = document.getElementById(parentId) || { clientWidth: 100, clientHeight: 100 };
   let width = parentDiv.clientWidth;
   let height = parentDiv.clientHeight;
 
@@ -14,7 +15,7 @@ const MiniLineChart = ({ data, parentId }) => {
   const [svgHeight, setHeight] = useState(height);
 
   const handleResize = () => {
-    parentDiv = document.getElementById(parentId);
+    parentDiv = document.getElementById(parentId) || { clientWidth: 100, clientHeight: 100 };
     setWidth(parentDiv.clientWidth);
     setHeight(parentDiv.clientHeight);
   };

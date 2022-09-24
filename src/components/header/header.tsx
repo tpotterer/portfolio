@@ -9,6 +9,7 @@ import {
 } from "@blueprintjs/core";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./header.css";
+import React from "react";
 
 const Header = () => {
   const location = useLocation();
@@ -22,7 +23,7 @@ const Header = () => {
         <div className="navbar-main">
           <NavbarGroup align={Alignment.LEFT}>
             <NavbarHeading>
-              <a onClick={() => navigate("/home")}>Thomas Potter</a>
+              <a onClick={() => navigate("/")}>Thomas Potter</a>
             </NavbarHeading>
             <NavbarDivider />
           </NavbarGroup>
@@ -31,36 +32,22 @@ const Header = () => {
               className={Classes.MINIMAL}
               icon="home"
               text="Home"
-              active={selectedPage === "/home"}
-              onClick={() => navigate("/home")}
-            />
-            <Button
-              className={Classes.MINIMAL}
-              icon="projects"
-              text="Projects"
-              active={selectedPage === "/projects"}
-              onClick={() => navigate("/projects")}
+              active={selectedPage === "/"}
+              onClick={() => navigate("/")}
             />
             <Button
               className={Classes.MINIMAL}
               icon="graph"
-              text="Demos"
-              active={selectedPage === "/demos"}
-              onClick={() => navigate("/demos")}
+              text="MLP"
+              active={selectedPage.includes("mlp")}
+              onClick={() => navigate("/mlp")}
             />
             <Button
               className={Classes.MINIMAL}
-              icon="globe"
-              text="Ski Map"
-              active={selectedPage === "/ski-map"}
-              onClick={() => navigate("/ski-map")}
-            />
-            <Button
-              className={Classes.MINIMAL}
-              icon="ship"
-              text="Ocean Tracking"
-              active={selectedPage === "/ocn-tracking"}
-              onClick={() => navigate("/ocn-tracking")}
+              icon="predictive-analysis"
+              text="Regex Helper"
+              active={selectedPage.includes("regex")}
+              onClick={() => navigate("/regex")}
             />
             <Button
               className={Classes.MINIMAL}

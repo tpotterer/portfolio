@@ -11,16 +11,21 @@ import "./chart-view.css";
 import { BASE_URL, headers } from "../../stocks";
 import { formatRFC3339, subDays } from "date-fns";
 
-import { Menu, MenuItem, Classes } from "@blueprintjs/core";
+import { Menu, MenuItem, Classes, Toaster } from "@blueprintjs/core";
 import { dateConfigs } from "../stock-content/stock-content";
 import { calculateChangeLabel } from "../chart-grid/chart-grid";
+import React from "react";
 
 const formatDateString = (date) => formatRFC3339(date).substring(0, 19) + "Z";
 
+const toaster = Toaster.create({ position: "top" });
+
 const ChartView = () => {
   const queryParams = useParams();
-  const [selectedTicker] = useState(queryParams["*"]);
-  const [data, setData] = useState([]);
+  const [selectedTicker] = useState<string>(queryParams["*"] || "");
+  const [data, setData] = useState<
+    Array<{ time: Date; close: number; volume: number }>
+  >([]);
 
   const [nDay] = useState(10);
 
@@ -31,13 +36,13 @@ const ChartView = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const [changeLabel, setChangeLabel] = useState("NAN");
+  const [changeLabel, setChangeLabel] = useState(null);
 
   useEffect(() => {
     if (!data || !data.length) return;
     const first = data[0];
     const last = data[data.length - 1];
-    setChangeLabel(calculateChangeLabel(first.close, last.close));
+    setChangeLabel(calculateChangeLabel(first.close, last.close) as any);
     setLoading(false);
   }, [data]);
 
@@ -58,15 +63,21 @@ const ChartView = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) =>
-        data?.bars
-          ? data.bars.map(
-              (elem) =>
-                ({ time: new Date(elem.t), close: elem.c, volume: elem.v } ||
-                [])
-            )
-          : []
-      )
+      .then((data) => {
+        if (data?.bars) {
+          return data.bars.map(
+            (elem) =>
+              ({ time: new Date(elem.t), close: elem.c, volume: elem.v } || [])
+          );
+        } else {
+          toaster.show({
+            message: `Could not retrieve data for ${selectedTicker}. Chart will not be visible`,
+            intent: "warning",
+            timeout: 3000,
+          });
+          return [];
+        }
+      })
       .then((data) => data.sort((a, b) => (a.time > b.time ? 1 : -1)))
       .then(setData);
   }, [selectedTicker, startDate]);
@@ -91,7 +102,7 @@ const ChartView = () => {
         </Menu>
       </div>
       <div className="stock-content-body">
-        <h2 className={loading ? Classes.SKELETON : null}>{changeLabel}</h2>
+        <h2 className={loading ? Classes.SKELETON : ""}>{changeLabel}</h2>
         <div
           className={`stock-chart-view-wrapper ${
             loading ? Classes.SKELETON : null
@@ -99,7 +110,11 @@ const ChartView = () => {
           id={divId}
         >
           {data.length ? (
-            <Line startDate={startDate} data={data} parentId={divId} />
+            <Line
+              startDate={new Date(startDate)}
+              data={data}
+              parentId={divId}
+            />
           ) : null}
         </div>
         <News symbols={[selectedTicker]} />

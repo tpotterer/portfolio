@@ -7,6 +7,7 @@ import MiniLineChart from "../../charts/mini-line/mini-line";
 import { useNavigate } from "react-router-dom";
 
 import "./chart-grid.css";
+import React from "react";
 
 export const calculateChangeLabel = (first, last) => (
   <span style={{ color: first < last ? "green" : "red" }}>{`${
@@ -43,14 +44,14 @@ const ChartGrid = ({ symbols, label, startDate }) => {
             symbol,
           }))
       )
-    ).then(setData);
+    ).then(setData as any);
   }, [stocks, startDate]);
   return (
     <div>
       <h2>{label}</h2>
       <div className="stock-card-grid">
         {Array.from(symbols.keys()).map((symbol, idx) => {
-          const found = data.find((elem) => elem.symbol === symbol);
+          const found: any = data.find((elem: any) => elem.symbol === symbol);
           const id = `stock-card-${idx}-${symbol}`;
           if (found) {
             if (found.values.length <= 0) {
