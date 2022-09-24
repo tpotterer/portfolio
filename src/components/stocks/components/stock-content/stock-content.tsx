@@ -13,6 +13,7 @@ import "./stock-content.css";
 
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import React from "react";
 
 export const dateConfigs = {
   "24H": subHours(new Date(), 24),

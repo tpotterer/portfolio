@@ -5,6 +5,7 @@ import StockNav from "./components/nav/nav";
 import StockContent from "./components/stock-content/stock-content";
 import ChartView from "./components/chart-view/chart-view";
 import StockMap from "./components/stock-map/stock-map";
+import React from "react";
 
 const stocksGroups = [
   [
@@ -76,6 +77,7 @@ const commoditiesGroups = [
   ],
 ];
 
+// nothing behind these APIs are secret, so I'm not worried about exposing them
 const API_KEY = "PKSCP2TN43BPC2QT2EGV";
 const API_SECRET = "D4msUQFgBKQXsk5q1zESbZMhIsuWYJJYw9DpACZN";
 export const BASE_URL = "https://data.alpaca.markets";

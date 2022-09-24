@@ -6,10 +6,20 @@
 
 .card-main{
     flex-direction: row;
-    display:flex
+    display:flex;
+    justify-content: space-between;
 }
 
 img {
-    width : 24rem;
+    width : 12rem;
     height: auto; /*to preserve the aspect ratio of the image*/
+}
+
+.home-page-wrapper{
+    background-color: #f6f7f9;
+    height: 100%
+}
+
+.card-content{
+    padding-right: 1vw
 }

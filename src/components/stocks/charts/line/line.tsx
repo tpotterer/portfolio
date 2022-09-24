@@ -1,11 +1,25 @@
 import * as d3 from "d3";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import "./line.css";
 
-const Line = ({ data, parentId, startDate }) => {
+export interface IChartRow{
+  time: Date;
+  close: number;
+  volume: number;
+
+}
+
+interface ILineChartInput{
+  data: IChartRow[];
+  parentId: string;
+  startDate: Date;
+}
+
+const Line = ({ data, parentId, startDate }: ILineChartInput) => {
   const svgRef = useRef(null);
 
-  let parentDiv = document.getElementById(parentId);
+  let parentDiv = document.getElementById(parentId) || { clientWidth: 500, clientHeight: 500 };
   let width = parentDiv.clientWidth;
   let height = parentDiv.clientHeight;
 
@@ -13,7 +27,7 @@ const Line = ({ data, parentId, startDate }) => {
   const [svgHeight, setHeight] = useState(height);
 
   const handleResize = () => {
-    parentDiv = document.getElementById(parentId);
+    parentDiv = document.getElementById(parentId) || { clientWidth: 500, clientHeight: 500 };
     setWidth(parentDiv.clientWidth);
     setHeight(parentDiv.clientHeight);
   };
@@ -55,26 +69,31 @@ const Line = ({ data, parentId, startDate }) => {
       .domain([0, d3.max(lineData.map((elem) => elem.volume))])
       .range([height - verticalMargin, height - verticalMargin - 0.3 * height]);
 
-    svg
+    const xMax = lineData.find((elem) => elem.close === d3Min);
+    if(xMax){
+      svg
       .append("text")
       .text(`$${d3Max}`)
       .attr("text-anchor", "middle")
       .attr("fill", "green")
-      .attr("x", xScale(lineData.find((elem) => elem.close === d3Max).time))
+      .attr("x", xScale(xMax.time))
       .attr("y", yScale(d3Max) - 5)
       .attr("font-family", "sans-serif")
       .attr("font-size", "9px");
+    }
 
-    svg
+    const xMin = lineData.find((elem) => elem.close === d3Max);
+    if(xMin){
+      svg
       .append("text")
       .text(`$${d3Min}`)
       .attr("text-anchor", "middle")
       .attr("fill", "red")
-      .attr("x", xScale(lineData.find((elem) => elem.close === d3Min).time))
+      .attr("x", xScale(xMin.time))
       .attr("y", yScale(d3Min) + 12)
       .attr("font-family", "sans-serif")
       .attr("font-size", "9px");
-
+    }
     // Add X grid lines with labels
     const xAxis = d3
       .axisBottom(xScale)

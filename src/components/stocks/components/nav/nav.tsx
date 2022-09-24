@@ -7,6 +7,7 @@ import { MenuItem } from "@blueprintjs/core";
 import { useNavigate } from "react-router-dom";
 
 import { searchOptions as knownOptions } from "./search-options";
+import React from "react";
 
 const StockNav = () => {
   const [selectedStock, setSelectedStock] = useState(null);
@@ -16,6 +17,7 @@ const StockNav = () => {
   useEffect(() => {
     if (selectedStock) {
       navigate(`/stocks/view/${selectedStock[0]}`);
+      window.location.reload();
     }
   }, [selectedStock]);
 
@@ -27,8 +29,7 @@ const StockNav = () => {
           items={knownOptions}
           itemRenderer={renderItem}
           itemPredicate={filterItem}
-          minimal={true}
-          onItemSelect={(item) => setSelectedStock(item)}
+          onItemSelect={(item) => setSelectedStock(item as any)}
           noResults={<MenuItem disabled={true} text={"No results."} />}
           popoverProps={{ matchTargetWidth: false, minimal: true }}
           inputValueRenderer={(item) => item[0]}
@@ -37,12 +38,12 @@ const StockNav = () => {
       <div className="stock-nav-divider"></div>
       <div className="stock-nav-body">
         <h2>
-          <a onClick={() => navigate("/stocks/home")}>Home</a>
+          <a onClick={() => {navigate("/stocks/home"); window.location.reload()}}>Home</a>
         </h2>
         <h2>Markets</h2>
-        <a onClick={() => navigate("/stocks/map")}>World Map</a>
-        <a onClick={() => navigate("/stocks/stocks")}>Stocks</a>
-        <a onClick={() => navigate("/stocks/commodities")}>Commodities</a>
+        <a onClick={() => {navigate("/stocks/map"); window.location.reload()}}>World Map</a>
+        <a onClick={() => {navigate("/stocks/stocks"); window.location.reload()}}>Stocks</a>
+        <a onClick={() => {navigate("/stocks/commodities"); window.location.reload()}}>Commodities</a>
         {/* <a onClick={() => navigate("/stocks/crypto")}>Cryptocurrencies</a> */}
       </div>
       <div className="stock-nav-divider"></div>

@@ -1,0 +1,38 @@
+.auto-grad-page-wrapper{
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px); 
+    background-color: #f6f7f9;
+    overflow-y: scroll
+}
+
+
+.auto-grad-diagram-controls{
+    align-items: flex-start;
+    background-color: #f6f7f9;
+    outline: none;
+    flex-shrink: 1;
+    flex: 1;
+    box-sizing: inherit;
+    width: 100%;
+    padding: 2vh 15vw
+}
+
+.auto-grad-diagram{
+    height: 100%
+}
+
+.auto-grad-content-wrapper{
+    align-items: flex-start;
+    background-color: #f6f7f9;
+    outline: none;
+    flex-shrink: 1;
+    flex: 1;
+    box-sizing: inherit;
+    width: 100%;
+    padding: 5vh 15vw 2vh;
+}
+
+.auto-grad-model-train-options{
+    padding-right: 3vw;
+}

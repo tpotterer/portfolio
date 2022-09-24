@@ -1,0 +1,35 @@
+.gpt-page-wrapper{
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px); 
+}
+
+.gpt-content-wrapper{
+    align-items: flex-start;
+    background-color: #f6f7f9;
+    outline: none;
+    flex-shrink: 1;
+    flex: 1;
+    box-sizing: inherit;
+    overflow-y: scroll;
+    width: 100%;
+    padding-top: 5vh;
+    padding: 5vh 15vw
+}
+
+.gpt-content-group{
+    text-align: center;
+    padding-bottom: 5vh;
+}
+
+textarea {
+    resize: none;
+  }
+
+.gpt-error{
+    color: red;
+}
+
+.gpt-generated-text{
+    color: green;
+}
