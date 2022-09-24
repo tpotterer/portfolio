@@ -10,6 +10,10 @@
     justify-content: space-between;
 }
 
+.changelog{
+    margin-top: 50px;
+}
+
 img {
     width : 12rem;
     height: auto; /*to preserve the aspect ratio of the image*/

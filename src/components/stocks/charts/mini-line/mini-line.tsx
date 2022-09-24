@@ -6,8 +6,10 @@ import React from "react";
 const MiniLineChart = ({ data, parentId }) => {
   const svgRef = useRef(null);
 
-  // TODO: Resizing
-  let parentDiv = document.getElementById(parentId) || { clientWidth: 100, clientHeight: 100 };
+  let parentDiv = document.getElementById(parentId) || {
+    clientWidth: 200,
+    clientHeight: 100,
+  };
   let width = parentDiv.clientWidth;
   let height = parentDiv.clientHeight;
 
@@ -15,7 +17,10 @@ const MiniLineChart = ({ data, parentId }) => {
   const [svgHeight, setHeight] = useState(height);
 
   const handleResize = () => {
-    parentDiv = document.getElementById(parentId) || { clientWidth: 100, clientHeight: 100 };
+    parentDiv = document.getElementById(parentId) || {
+      clientWidth: 200,
+      clientHeight: 100,
+    };
     setWidth(parentDiv.clientWidth);
     setHeight(parentDiv.clientHeight);
   };
@@ -23,6 +28,12 @@ const MiniLineChart = ({ data, parentId }) => {
   window.addEventListener("resize", handleResize);
 
   useEffect(() => {
+    let parentDiv = document.getElementById(parentId) || {
+      clientWidth: 200,
+      clientHeight: 100,
+    };
+    let width = parentDiv.clientWidth;
+    let height = parentDiv.clientHeight;
     const verticalMargin = 25;
     const horizontalMargin = 25;
     // Create root container where we will append all other chart elements

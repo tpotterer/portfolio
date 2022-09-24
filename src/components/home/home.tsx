@@ -29,6 +29,16 @@ const Home = () => {
             <img src={me} />
           </div>
         </Card>
+        <div className="changelog">
+          <h3>Changelog</h3>
+          <ul>
+            <li>
+              September 2022 - Initial version. Added MLP, Stocks and Regex
+              Helper sections. Unfortunately, Regex Helper needs to be disabled
+              until further notice (see page for more details).
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

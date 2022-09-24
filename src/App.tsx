@@ -4,13 +4,13 @@ import Home from "./components/home/home";
 import Stocks from "./components/stocks/stocks";
 import Gpt from "./components/gpt/gpt";
 import AutoGrad from "./components/auto-grad/auto-grad";
-import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import React from "react";
 
 const App = () => {
   return (
     <div className="app">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Header />}>
             <Route path="" element={<Home />} />
@@ -20,7 +20,7 @@ const App = () => {
             <Route path="*" element={<div>not found</div>} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
