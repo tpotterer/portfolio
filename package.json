@@ -2,6 +2,7 @@
   "name": "portfolio-new",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tpotterer.github.io/portfolio/",
   "dependencies": {
     "@alpacahq/alpaca-trade-api": "^2.16.1",
     "@blueprintjs/core": "^4.6.1",
@@ -16,6 +17,7 @@
     "@types/react-dom": "^18.0.6",
     "d3": "^7.6.1",
     "date-fns": "^2.29.2",
+    "gh-pages": "^4.0.0",
     "jquery": "^3.6.1",
     "mapbox-gl": "^2.10.0",
     "mathjs": "^11.0.1",
@@ -32,6 +34,8 @@
     "which-country": "^1.0.0"
   },
   "scripts": {
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
