@@ -37,6 +37,13 @@ const Header = () => {
             />
             <Button
               className={Classes.MINIMAL}
+              icon="code"
+              text="ts-nets Demo"
+              active={selectedPage.includes("ts-nets")}
+              onClick={() => navigate("/ts-nets")}
+            />
+            <Button
+              className={Classes.MINIMAL}
               icon="graph"
               text="MLP"
               active={selectedPage.includes("mlp")}

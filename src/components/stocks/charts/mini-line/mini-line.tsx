@@ -6,36 +6,27 @@ import React from "react";
 const MiniLineChart = ({ data, parentId }) => {
   const svgRef = useRef(null);
 
-  let parentDiv = document.getElementById(parentId) || {
-    clientWidth: 200,
-    clientHeight: 100,
-  };
-  let width = parentDiv.clientWidth;
-  let height = parentDiv.clientHeight;
-
-  const [svgWidth, setWidth] = useState(width);
-  const [svgHeight, setHeight] = useState(height);
+  const [svgWidth, setWidth] = useState(0);
+  const [svgHeight, setHeight] = useState(0);
 
   const handleResize = () => {
-    parentDiv = document.getElementById(parentId) || {
-      clientWidth: 200,
-      clientHeight: 100,
-    };
-    setWidth(parentDiv.clientWidth);
-    setHeight(parentDiv.clientHeight);
+    const newParentDiv = document.getElementById(parentId);
+    if (!newParentDiv) return;
+    setWidth(newParentDiv.clientWidth);
+    setHeight(newParentDiv.clientHeight);
   };
 
+  useEffect(() => {
+    handleResize();
+  }, [data]);
   window.addEventListener("resize", handleResize);
 
   useEffect(() => {
-    let parentDiv = document.getElementById(parentId) || {
-      clientWidth: 200,
-      clientHeight: 100,
-    };
-    let width = parentDiv.clientWidth;
-    let height = parentDiv.clientHeight;
+    if (svgHeight == 0 || svgWidth == 0) return;
     const verticalMargin = 25;
     const horizontalMargin = 25;
+    const height = svgHeight;
+    const width = svgWidth;
     // Create root container where we will append all other chart elements
     const svgEl = d3.select(svgRef.current);
     svgEl.selectAll("*").remove(); // Clear svg content before adding new elements

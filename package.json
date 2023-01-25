@@ -2,7 +2,7 @@
   "name": "portfolio-new",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tpotterer.github.io/portfolio/",
+  "homepage": "https://tpotterer.github.io/",
   "dependencies": {
     "@alpacahq/alpaca-trade-api": "^2.16.1",
     "@blueprintjs/core": "^4.6.1",
@@ -29,6 +29,8 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "sentiment": "^5.0.2",
+    "shuffle-array": "^1.0.1",
+    "ts-nets": "^1.0.7",
     "typescript": "^4.8.3",
     "web-vitals": "^2.1.0",
     "which-country": "^1.0.0"

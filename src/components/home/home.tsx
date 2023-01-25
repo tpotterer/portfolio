@@ -25,6 +25,11 @@ const Home = () => {
                 changelog below should give a good indication of what has been
                 added recently.
               </p>
+              <p>
+                I do have another website, it is quite old but can be found at{" "}
+                <a href="https://tp665.github.io/">tp665.github.io</a>. Contact
+                information on the site is out of date.
+              </p>
             </div>
             <img src={me} />
           </div>
@@ -32,6 +37,14 @@ const Home = () => {
         <div className="changelog">
           <h3>Changelog</h3>
           <ul>
+            <li>
+              January 2023 - Added a demo of a TypeScript-based DL package I
+              developed a while back. You can create a simple neural net and
+              choose which dataset/features you would like to play with. The
+              decision boundary visualiser is often more interpretable than the
+              raw loss values and helps to identify the model&apos;s flaws.
+            </li>
+            <br />
             <li>
               September 2022 - Initial version. Added MLP, Stocks and Regex
               Helper sections. Unfortunately, Regex Helper needs to be disabled

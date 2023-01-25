@@ -4,6 +4,7 @@ import Home from "./components/home/home";
 import Stocks from "./components/stocks/stocks";
 import Gpt from "./components/gpt/gpt";
 import AutoGrad from "./components/auto-grad/auto-grad";
+import TsNetsDemo from "./components/ts-nets-demo/ts-nets-demo";
 import { Routes, Route, HashRouter } from "react-router-dom";
 import React from "react";
 
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Header />}>
             <Route path="" element={<Home />} />
             <Route path="mlp/*" element={<AutoGrad />} />
+            <Route path="ts-nets/*" element={<TsNetsDemo />} />
             <Route path="regex/*" element={<Gpt />} />
             <Route path="stocks/*" element={<Stocks />} />
             <Route path="*" element={<div>not found</div>} />
