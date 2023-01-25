@@ -101,7 +101,7 @@ const Gpt = () => {
           <h1>NOTICE:</h1>
           <p>
             This page needed to be disabled as I&apos;m not entirely sure it
-            complies with openAI&apos;s terms of service. I have contacted them
+            complies with OpenAI&apos;s terms of service. I have contacted them
             for clarification but I will try to get it back up and running as
             soon as possible. In the meantime, if you want to try it out, you
             can email me at{" "}
